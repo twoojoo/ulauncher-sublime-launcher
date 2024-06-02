@@ -37,6 +37,8 @@ class KeywordQueryEventListener(EventListener):
             else:
                 matches = sub_folders
 
+            items = []
+
             for name in matches:
                 item = ExtensionResultItem(
                     icon = 'images/icon.png',
