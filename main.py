@@ -5,6 +5,8 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 
+from fuzzywuzzy import process
+
 import glob
 import os
 import subprocess
@@ -26,10 +28,14 @@ class KeywordQueryEventListener(EventListener):
         for sublime_path in sublime_paths:
             explicit_path = sublime_path.replace('~', home_dir, 1)
 
-            for name in glob.glob(explicit_path + "/*/"):
-                if arg and arg.lower() not in name.lower():
-                    continue
-                    
+            sub_folders = glob.glob(explicit_path + "/*/")
+
+            if arg == None:
+                matches = process.extract(arg, sub_folders, limit=10)
+            else:
+                matches = sub_folders
+
+            for name in matches:
                 item = ExtensionResultItem(
                     icon = 'images/icon.png',
                     name = name.split('/')[-2],
