@@ -19,13 +19,10 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         sublime_paths = os.path.expanduser(extension.preferences['dirs']).split(",")
         items = []
-        # print(sublime_paths)
+        
         for sublime_path in sublime_paths:
-            # print(sublime_path)
-            print(glob.glob(sublime_path + "/*"))
-            for name in glob.glob(sublime_path + "/*"):
+            for name in glob.glob(sublime_path + "/*/"):
                 project_name = name.split('/').pop().replace('_', ' ').replace('.', ' ').title()
-                # print(project_name)
                 item = ExtensionResultItem(
                     icon = 'images/icon.png',
                     name = project_name,
