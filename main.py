@@ -18,14 +18,14 @@ class SublProjectsExtension(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         sublime_paths = os.path.expanduser(extension.preferences['dirs']).split(",")
+        home_dir = os.path.expanduser('~')
         items = []
         
         arg = event.get_argument()
         
         for sublime_path in sublime_paths:
-            print(sublime_path)
-            print(glob.glob(sublime_path + "/*/"))
-            for name in glob.glob(sublime_path + "/*/"):
+            print(sublime_path.replace('~', home_dir, 1))
+            for name in glob.glob(sublime_path.replace('~', home_dir, 1) + "/*/"):
                 if arg and arg.lower() not in name.lower():
                     continue
                     
