@@ -24,6 +24,7 @@ class KeywordQueryEventListener(EventListener):
         items = []
         
         arg = event.get_argument()
+        items = []
         
         for sublime_path in sublime_paths:
             explicit_path = sublime_path.replace('~', home_dir, 1)
@@ -36,8 +37,6 @@ class KeywordQueryEventListener(EventListener):
                 matches = [t[0] for t in process.extract(arg, sub_folders, limit=10)]
             else:
                 matches = sub_folders
-
-            items = []
 
             for name in matches:
                 item = ExtensionResultItem(
