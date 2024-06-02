@@ -24,8 +24,9 @@ class KeywordQueryEventListener(EventListener):
         arg = event.get_argument()
         
         for sublime_path in sublime_paths:
-            print(sublime_path.replace('~', home_dir, 1))
-            for name in glob.glob(sublime_path.replace('~', home_dir, 1) + "/*/"):
+            explicit_path = sublime_path.replace('~', home_dir, 1)
+
+            for name in glob.glob(explicit_path + "/*/"):
                 if arg and arg.lower() not in name.lower():
                     continue
                     
