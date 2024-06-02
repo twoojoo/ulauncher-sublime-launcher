@@ -31,7 +31,7 @@ class KeywordQueryEventListener(EventListener):
             sub_folders = glob.glob(explicit_path + "/*/")
 
             if arg == None:
-                matches = process.extract(arg, sub_folders, limit=10)
+                matches = [t[0] for t in process.extract(arg, sub_folders, limit=10)]
             else:
                 matches = sub_folders
 
