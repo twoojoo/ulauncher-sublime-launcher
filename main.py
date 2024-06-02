@@ -21,7 +21,7 @@ class KeywordQueryEventListener(EventListener):
         items = []
 
         print(event.get_query())
-        print(event.get_argument()
+        print(event.get_argument())
         
         for sublime_path in sublime_paths:
             for name in glob.glob(sublime_path + "/*/"):
