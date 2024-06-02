@@ -22,10 +22,9 @@ class KeywordQueryEventListener(EventListener):
         
         for sublime_path in sublime_paths:
             for name in glob.glob(sublime_path + "/*/"):
-                project_name = name.split('/')[-2].replace('_', ' ').replace('.', ' ').title()
                 item = ExtensionResultItem(
                     icon = 'images/icon.png',
-                    name = project_name,
+                    name = name.split('/')[-2],
                     description = 'Path: %s' % name,
                     on_enter = ExtensionCustomAction(name)
                 )
