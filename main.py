@@ -23,7 +23,9 @@ class KeywordQueryEventListener(EventListener):
         arg = event.get_argument()
         
         for sublime_path in sublime_paths:
+            print(sublime_path)
             for name in glob.glob(sublime_path + "/*/"):
+                print(name)
                 if arg and arg.lower() not in name.lower():
                     continue
                     
