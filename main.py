@@ -21,6 +21,8 @@ class KeywordQueryEventListener(EventListener):
         items = []
         
         for sublime_path in sublime_paths:
+            print(sublime_path)
+            print(glob.glob(sublime_path + "/*/"))
             for name in glob.glob(sublime_path + "/*/"):
                 project_name = name.split('/').pop().replace('_', ' ').replace('.', ' ').title()
                 item = ExtensionResultItem(
