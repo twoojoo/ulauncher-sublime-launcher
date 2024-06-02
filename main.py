@@ -17,17 +17,18 @@ class SublProjectsExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        sublime_path = os.path.expanduser(extension.preferences['sublime_projects_dir'])
+        sublime_paths = os.path.expanduser(extension.preferences['projects_dirs']).split(",")
         items = []
-        for name in glob.glob(sublime_path + "/*.sublime-project"):
-            project_name = name.split('/').pop().replace('.sublime-project', '').replace('_', ' ').title()
-            item = ExtensionResultItem(
-                icon = 'images/icon.png',
-                name = project_name,
-                description = 'Path: %s' % name,
-                on_enter = ExtensionCustomAction(name)
-            )
-            items.append(item)
+        for sublime_path in sublime_paths:
+            for name in glob.glob(sublime_path + "/*"):
+                project_name = name.split('/').pop().replace('_', ' ')replace('.', ' ').title()
+                item = ExtensionResultItem(
+                    icon = 'images/icon.png',
+                    name = project_name,
+                    description = 'Path: %s' % name,
+                    on_enter = ExtensionCustomAction(name)
+                )
+                items.append(item)
 
         return RenderResultListAction(items)
 
@@ -35,7 +36,7 @@ class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         project_path = event.get_data()
         subl = extension.preferences['sublime_executable']
-        subprocess.call([subl, "--project", project_path, "-n"])
+        subprocess.call([subl, project_path, "-n"])
 
 if __name__ == '__main__':
     SublProjectsExtension().run()
