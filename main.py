@@ -17,8 +17,9 @@ class SublProjectsExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        sublime_paths = os.path.expanduser(extension.preferences['projects_dirs']).split(",")
+        sublime_paths = os.path.expanduser(extension.preferences['dirs']).split(",")
         items = []
+        
         for sublime_path in sublime_paths:
             for name in glob.glob(sublime_path + "/*"):
                 project_name = name.split('/').pop().replace('_', ' ')replace('.', ' ').title()
