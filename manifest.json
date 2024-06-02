@@ -16,10 +16,10 @@
       "default_value": "sublp"
     },
     {
-      "id": "sublime_projects_dir",
+      "id": "sublime_projects_dirs",
       "type": "input",
-      "name": "Sublime Text Projects Path",
-      "description": "Directory of your .sublime-project files",
+      "name": "Sublime Text Projects Paths",
+      "description": "Directories list of your projects (comma separated)",
       "default_value": "~/sublime-projects"
     },
     {
